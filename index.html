@@ -516,5 +516,59 @@
                     <div class="member-card">
                         <h4>${orang.nama}</h4>
                         <p>${orang.peran}</
+                                    list.innerHTML += `
+                <div class="member-card">
+                    <h4>${orang.nama}</h4>
+                    <p>${orang.peran}</p>
+                    <p>${orang.kelas}</p>
+                    <button class="delete-btn" onclick="hapusAnggota(${index})">🗑️ Hapus</button>
+                </div>
+            `;
+            localStorage.setItem('daftarAnggota', JSON.stringify(anggota));
+        }
+
+        // === HAPUS ANGGOTA ===
+        function hapusAnggota(index) {
+            anggota.splice(index, 1);
+            tampilkanAnggota();
+        }
+
+        // === LOGIN ===
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (password === 'sbk123') {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('mainSite').style.display = 'block';
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+
+        // === LOGOUT ===
+        function logout() {
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('mainSite').style.display = 'none';
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        // === NAVIGASI HALAMAN ===
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                const halaman = this.getAttribute('data-page');
+                document.getElementById(halaman).classList.add('active');
+            });
+        });
+
+        tampilkanAnggota();
+  </script>
+</body>
+</html>
+
     
   
